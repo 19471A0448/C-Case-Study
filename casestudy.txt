@@ -1,0 +1,143 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+class Date{
+    private:
+    int dd,mm,yy;
+    public:
+    Date(int dd,int mm,int yy)
+    {
+       this->dd=dd;
+       this->mm=mm;
+       this->yy=yy;
+       
+    }
+    void showDate()
+    {
+        cout<<"\nDOB is:"<<dd<<"-"<<mm<<"-"<<yy;
+    }
+   
+};
+
+class Person{
+    private:
+    string Name;
+    Date DOB;
+    public:
+    Person(string Name,int dd,int mm,int yy)
+    :DOB(dd,mm,yy)
+    {
+        this->Name=Name;
+    }
+    void Personinfo()
+    {
+        cout<<"\nName:"<<Name;
+        DOB.showDate();
+       
+    }
+};
+class Employee:public Person
+{
+    protected:
+    int employeeID;
+    int Salary;
+    public:
+    Employee(string Name,int dd,int mm,int yy,int employeeID,int Salary)
+    :Person(Name,dd,mm,yy)
+    
+    
+    
+    {
+        this->employeeID=employeeID;
+        this->Salary=Salary;
+    }
+    void employeeinfo()
+    {
+        Personinfo();
+        cout<<"\nemployeeID:"<<employeeID;
+        cout<<"\nBasic Salary is:"<<Salary;
+        
+        
+    }
+};
+
+class SalesManager:public Employee
+{
+    private:
+    int target;
+    int cpk;
+    int km;
+    public:
+    SalesManager(string Name,int dd,int mm,int yy,int employeeID,int Salary,int target,int cpk,int km)
+    :Employee(Name,dd,mm,yy,employeeID,Salary)
+    {
+        this->target=target;
+        this->cpk=cpk;
+        this->km=km;
+    }
+    void SalesManagerinfo()
+    {
+        double comm=target*0.2;
+        double travel=cpk*km;
+        double calsal=comm+travel+Salary;
+        employeeinfo();
+        cout<<"\nTotal salary is:"<<calsal;
+    }
+};
+class Programmer:public Employee
+{
+    private:
+    string pname;
+    int cpk;
+    int km;
+    public:
+    Programmer(string name,int dd,int mm,int yy,int employeeID,int Salary,int cpk,int km,string pname )
+    :Employee(name,dd,mm,yy,employeeID,Salary)
+    {
+        this->cpk=cpk;
+        this->km=km;
+        this->pname=pname;
+    }
+    void Programmerinfo()
+    {
+        
+        double travel=cpk*km;
+        double calsal=travel+Salary;
+        employeeinfo();
+        cout<<"\nproject name is:"<<pname;
+        cout<<"\nTotal salary is:"<<calsal;
+        
+    }
+    
+};
+class Admin:public Employee
+{
+    private:
+    string BUname;
+    int allowances;
+    public:
+    Admin(string name,int dd,int mm,int yy,int employeeID,int Salary,int allowances,string BUname )
+    :Employee(name,dd,mm,yy,employeeID,Salary)
+    {
+        this->allowances=allowances;
+        this->BUname=BUname;
+        
+    }
+    void Admininfo()
+    {
+        double calsal=allowances+Salary;
+        employeeinfo();
+        cout<<"\nBusiness unit is:"<<BUname;
+        cout<<"\nTotal salary is:"<<calsal;
+        
+    }
+    
+};
+int main()
+{
+     
+    Admin a1("Shaziah",11,11,2023,201803,50000,50000,"SmartOps");
+    a1.Admininfo();
+    return 0;
+}
+    
